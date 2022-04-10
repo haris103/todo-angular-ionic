@@ -1,0 +1,59 @@
+<ion-content>
+  <!-- <app-nav></app-nav> -->
+<ion-grid>
+<ion-row>
+  <ion-col size-md="6" offset-md="3">
+    <ion-card color="">
+      <ion-card-header class="ion-text-center" color="">
+        Todo App -- {{this.submitapi.loginForm.value.input}}
+      </ion-card-header>
+      <!-- Reactive form -->
+      <ion-grid>
+        <ion-row>
+          <ion-col size-md="10" class="bg1">
+            <form [formGroup]="submitapi.loginForm" (ngSubmit)="onSubmit()" class="_form">
+              <input type="text" placeholder="Enter the list items here"  formControlName="input" class="_input">
+            </form>
+          </ion-col>
+          <ion-col class="bg2">
+            <ion-button (click)="onSubmit()">
+              <ion-icon name="add-circle-sharp"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <!-- ITEM GRID -->
+      <!-- <ion-grid *ngFor="let i of submitapi.getTodos() | async"> -->
+        <ion-grid *ngFor="let i of apiDataFromStore$ | async">
+
+        <ion-row>
+          <ion-col size-md="10" class="bg1">
+                 <!-- <p>{{this.i[0].fullname  }}</p> -->
+            <ion-text class="text_color">{{this.i.input}}</ion-text>
+          </ion-col>
+          <ion-col size-md="2" class="bg2">
+            <ion-button (click)="onEdit(this.i.id)">
+              <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
+            <ion-button class="icon_btn" (click)="onDelete(this.i.id)">
+              <ion-icon name="close-circle-sharp"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-row>
+          <ion-col class="remove_btn1">
+            <ion-button size="default" (click)="onRemove()">
+              <ion-text>Remove All</ion-text>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ion-col>
+</ion-row>
+</ion-grid>
+<!-- <ion-button (click)="goBack()">Go Back</ion-button> -->
+
+</ion-content>
